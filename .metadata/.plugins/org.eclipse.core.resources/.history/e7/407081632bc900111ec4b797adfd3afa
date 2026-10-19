@@ -1,0 +1,58 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8" import="java.util.*"%>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<style>
+td{
+	font-weight: 400;
+}
+</style>
+</head>
+<body>
+	<%! 
+		/* 3의배수 구하는 메소드  */
+		public boolean third(int num01){
+			boolean result;
+			if(num01%3==0){
+				result = true;
+			}else{
+				result = false;
+			}
+			return result;
+		}
+		/* 짝수 구하는 메소드 */
+		public String second(int num02){
+			String result ="";
+			if(num02%2==0){
+				result = "짝수";
+			}else{
+				result = "홀수";
+			}
+			return result;
+		}
+		
+		/* 제곱 구하는 메소드  */
+		public int number(int num03,int num04){
+			int result;
+			result = num03*num04;
+			return result;
+		}
+	%>
+	
+	<table border="1">
+		<tr>
+			<th>숫자</th><th>제곱</th><th>구분</th>
+		</tr>	
+	<%for(int i=1; i<=20; i++){%>
+		<tr style="background-color:<%=second(i).equals("짝수")?"#e6f2ff":"#ffffff"%>;">
+			<td style="font-weight:<%=third(i)?"bold":"300"%>;"><%=i %></td>
+			<td><%=number(i,i)%></td>
+			<td><%=second(i)%></td>
+		</tr>
+	<%} %>
+	</table>
+</body>
+</html>

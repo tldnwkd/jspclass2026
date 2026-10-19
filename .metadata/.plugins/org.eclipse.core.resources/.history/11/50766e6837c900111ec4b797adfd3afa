@@ -1,0 +1,44 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8" import="java.util.*"%>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+	<h1>번호판</h1>
+	<%!  
+		int[] winNums = {3, 12, 19, 27, 33, 41};
+		int find =0;
+	 	public boolean isWinning(int num){
+	 		boolean result = false;
+	 		for(int i=0; i<winNums.length; i++){
+	 			if(num==winNums[i]){
+	 				result = true;
+	 			}
+	 		}
+	 		return result;
+	 	}	
+	%>
+	<table border="1">
+		<tr>
+		<%for(int i=1; i<=45; i++){%>
+			<td style="background-color:<%=isWinning(i)?"gold; font-weight:bold;":"white; "%>"><%= i %></td>
+			<%if(i%9==0){%>
+				</tr>
+			<%}%>		
+		<%}%>
+		
+	</table>
+	<div sytle="margin-top: 20px; height : 25px;">당첨번호:
+		<%for(int i=0; i<winNums.length; i++){ %>
+			<%if(i+1==winNums.length){ %>
+				<%= find = winNums[i]%>
+			<%}else{%>
+				<%= find = winNums[i]%>,
+			<%} %>
+		<%} %>
+	</div>
+</body>
+</html>

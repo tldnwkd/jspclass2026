@@ -1,0 +1,53 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+	<%
+		request.setCharacterEncoding("utf-8");
+	
+		String id = request.getParameter("id");
+		String pass = request.getParameter("pass");
+		String passchk = request.getParameter("passchk");
+		String email = request.getParameter("email");
+		String tel = request.getParameter("tel");
+		String hobby[] = request.getParameterValues("hobby");
+		String job = request.getParameter("job");
+		String age = request.getParameter("age");
+		String info = request.getParameter("info");
+	%>
+	<table border="1">
+		<tr>
+			<td>아이디 : <%= id%></td>
+		</tr>
+		<tr>
+			<td>비밀번호 : <%= pass%></td>
+		</tr>
+		<tr>
+			<td>아이디 : <%= passchk%></td>
+		</tr>
+		<tr>
+			<td>아이디 : <%= email%></td>
+		</tr>
+		<tr>
+			<td>아이디 : <%= tel%></td>
+		</tr>
+		<tr>
+			<td>아이디 : <%= hobby%></td>
+		</tr>
+		<tr>
+			<td>아이디 : <%= job%></td>
+		</tr>
+		<tr>
+			<td>아이디 : <%= age%></td>
+		</tr>
+		<tr>
+			<td>아이디 : <%= info%></td>
+		</tr>
+	</table>
+</body>
+</html>

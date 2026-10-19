@@ -1,0 +1,17 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8" import="java.util.*"%>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>커피메뉴</title>
+</head>
+<body>
+	<form action="CoffeeProc.jsp">
+		<table>
+			<input type="radio" name="coffee" value="아메리카노(3000원)" id="ame">
+ 					<label for="ame">아메리카노(3000원)</label>&nbsp;&nbsp;
+		</table>
+	</form>
+</body>
+</html>

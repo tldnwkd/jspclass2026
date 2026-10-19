@@ -1,0 +1,30 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8" import="java.util.*"%>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+	<%! 
+		String[] names = {"송중기","전지현","손흥민", "김연아","유재석"};
+		int[] basePays = {350,420,280,450,310};
+		int[] years = {5,8,2,10,4};
+		
+		public int getBonus(int year){
+			int result = 0;
+			for(int i=0; i<years.length; i++){
+				if(year>=7){
+					result = 100;
+				}else if(year>=4 ||year<7){
+					result = 70;
+				}else{
+					result = 40;
+				}
+			}
+			return result;
+		}
+	%>
+</body>
+</html>
