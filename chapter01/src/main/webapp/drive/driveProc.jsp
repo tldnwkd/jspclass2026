@@ -1,0 +1,76 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8" import="java.util.*"%>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>주행내역 Proc</title>
+<style type="text/css">
+	table{
+		border: 1px solid; black;
+	}
+	td{
+		border: 1px solid; black;
+		width: 100px
+	}
+	.menu{
+		background-color: lightblue;
+	}
+</style>
+</head>
+<body>
+	<% 
+		request.setCharacterEncoding("utf-8");
+	   	
+		String drvDate = request.getParameter("drvDate");
+		String carNo = request.getParameter("carNo");
+		String drvStart = request.getParameter("drvStart");
+		String drvEnd = request.getParameter("drvEnd");
+		String deptCode = request.getParameter("deptCode");
+		String drvMoney = request.getParameter("drvMoney");
+		
+		String msg = "";
+		if(drvDate ==null||drvDate.isEmpty()){
+			msg = "주행일자가 입력되지 않았습니다!";
+		}else if(carNo ==null||carNo.isEmpty()){
+			msg = "차량번호가 입력되지 않았습니다!";
+		}else if(drvStart ==null||drvStart.isEmpty()){
+			msg = "출발Km가 입력되지 않았습니다!";
+		}else if(drvEnd ==null||drvEnd.isEmpty()){
+			msg = "도착km가 입력되지 않았습니다!";
+		}else if(deptCode ==null||deptCode.isEmpty()){
+			msg = "부서코드가 선택되지 않았습니다!";
+		}else if(drvMoney ==null||drvMoney.isEmpty()){
+			msg = "주유금액이 입력되지 않았습니다!";
+		}
+		
+		if(!msg.equals("")){%>
+			<script type="text/javascript">
+				alert("<%=msg%>");
+				history.go(-1);
+			</script>
+	  <%}else{%>
+	
+		<table>
+			<tr>
+				<td class="menu">주행일자</td><td><%=drvDate%></td>
+			</tr>
+			<tr>
+				<td class="menu">차량번호</td><td><%=carNo%></td>
+			</tr>
+			<tr>
+				<td class="menu">출발Km</td><td><%=drvStart%>Km</td>
+			</tr>
+			<tr>
+				<td class="menu">도착Km</td><td><%=drvEnd%>Km</td>
+			</tr>
+			<tr>
+				<td class="menu">부서코드</td><td><%=deptCode%></td>
+			</tr>
+			<tr>
+				<td class="menu">주유금액</td><td><%=drvMoney%>원</td>
+			</tr>
+		<table>
+	<%} %>
+</body>
+</html>

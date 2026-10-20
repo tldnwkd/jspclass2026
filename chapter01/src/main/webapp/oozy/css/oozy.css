@@ -1,0 +1,242 @@
+@charset "UTF-8";
+
+/* 1. 기본 초기화 및 배경 설정 */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Malgun Gothic', '맑은 고딕', sans-serif;
+    color: #222;
+    background-color: #fbfaf5; /* 원본 시안 크림/아이보리 배경색 */
+}
+
+/* 2. 상단 헤더 & 메뉴 래퍼 (main.jsp의 .header-wrapper) */
+.header-wrapper {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #ffffff;
+    padding: 20px 80px;
+    border-bottom: 1px solid #333333;
+}
+
+/* header.jsp와 nav.jsp 내부의 불필요한 마진/패딩 제거 */
+.header-wrapper #top {
+    display: flex;
+    align-items: center;
+    margin: 0;
+    padding: 0;
+}
+
+/* OOZY COFFEE 로고 (header.jsp 내부) */
+.header-wrapper header h2,
+.header-wrapper #top h2 {
+    font-size: 22px;
+    font-weight: 800;
+    color: #1e3a2b; /* 다크 그린 */
+    letter-spacing: 0.5px;
+    margin: 0;
+}
+
+/* 우측 상단 메뉴 (nav.jsp 내부) */
+.header-wrapper nav,
+.header-wrapper #top {
+    display: flex;
+    gap: 30px;
+}
+
+.header-wrapper nav a,
+.header-wrapper #top a {
+    text-decoration: none;
+    color: #222222;
+    font-size: 15px;
+    font-weight: 600;
+}
+
+.header-wrapper nav a:hover,
+.header-wrapper #top a:hover {
+    color: #1e3a2b;
+}
+
+/* 3. 본문 영역 */
+section {
+    min-height: 520px;
+    padding: 60px 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+/* 홈 화면 (home.jsp) */
+section h2 {
+    font-size: 26px;
+    font-weight: bold;
+    color: #111;
+    margin-bottom: 30px;
+    text-align: center;
+}
+
+section p {
+    font-size: 15px;
+    color: #444;
+    line-height: 1.8;
+    text-align: center;
+}
+
+/* 4. 메뉴 등록 화면 테이블 스타일 (menuInsert.jsp) */
+section h3 {
+    font-size: 24px;
+    font-weight: bold;
+    margin-bottom: 25px;
+    text-align: center;
+}
+
+form {
+    width: 100%;
+    max-width: 620px;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    background-color: #f3f1eb;
+    border: 1px solid #b8b5ad;
+}
+
+table td {
+    padding: 10px 15px;
+    border: 1px solid #b8b5ad;
+    font-size: 14px;
+}
+
+table tr td:first-child label,
+table tr td:first-child {
+    font-weight: bold;
+}
+
+table input[type="text"],
+table select {
+    padding: 4px 8px;
+    border: 1px solid #a6a29a;
+    background-color: #fff;
+    font-size: 14px;
+}
+
+table input[type="text"]#menu {
+    width: 220px;
+}
+
+table input[type="text"]#price {
+    width: 180px;
+}
+
+table input[type="text"]#info {
+    width: 95%;
+    height: 80px;
+}
+
+table tr:last-child td {
+    text-align: center;
+    background-color: #ebe8df;
+    padding: 12px;
+}
+
+table input[type="submit"],
+table input[type="reset"] {
+    padding: 4px 12px;
+    margin: 0 4px;
+    background-color: #f7f6f0;
+    border: 1px solid #888;
+    font-size: 13px;
+    cursor: pointer;
+}
+
+/* 5. 메뉴 조회 카테고리 & 상품 목록 (menuList.jsp) */
+.menu-con {
+    display: flex;
+    list-style: none;
+    background-color: #e5e3dc;
+    border: 1px solid #ccc;
+    margin-bottom: 40px;
+    width: 100%;
+    max-width: 1000px;
+}
+
+.menu-con li {
+    flex: 1;
+    text-align: center;
+    padding: 12px 0;
+    font-size: 13px;
+    color: #555;
+    cursor: pointer;
+}
+
+.menu-con li.on {
+    background-color: #1e3a2b;
+    color: #ffffff;
+    font-weight: bold;
+}
+
+.menu-con + ul {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 30px 20px;
+    list-style: none;
+    width: 100%;
+    max-width: 1000px;
+}
+
+.menu-con + ul li {
+    text-align: center;
+}
+
+.menu-con + ul img {
+    width: 100%;
+    max-width: 150px;
+    height: auto;
+}
+
+.menu-con + ul .menuname {
+    font-size: 14px;
+    font-weight: bold;
+    margin-top: 8px;
+}
+
+.menu-con + ul .menuinfo {
+    font-size: 12px;
+    color: #666;
+    margin-top: 4px;
+}
+
+/* 6. 하단 푸터 (footer.jsp) */
+footer {
+    background-color: #1e3a2b; /* 진녹색 배경 */
+    color: #d1ded7;
+    padding: 40px 80px;
+    font-size: 13px;
+    line-height: 1.8;
+   
+}
+
+footer h3 {
+    color: #ffffff;
+    font-size: 16px;
+    font-weight: bold;
+    margin-bottom: 15px;  
+}
+
+footer p {
+    margin: 2px 0;  
+}
+
+footer div {
+    margin-top: 15px;
+    color: #a3baa8;
+}
+
+div .procwrap{
+	width: 500px;
+}
