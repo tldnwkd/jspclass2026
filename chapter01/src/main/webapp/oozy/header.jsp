@@ -3,6 +3,6 @@
 
 <div id="top">
 		<header>
-			<h2>OOZY COFFEE</h2>
+			<h2><a href="main.jsp">OOZY COFFEE</a></h2>
 		</header>
 </div>
