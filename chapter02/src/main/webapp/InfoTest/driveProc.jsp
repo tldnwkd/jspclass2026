@@ -6,6 +6,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<link rel="stylesheet" href="css/main.css">
 </head>
 <body>
 	<%
@@ -18,7 +19,7 @@
 		String deptCode = request.getParameter("DEPT_CODE");
 		String drvMoney = request.getParameter("DRV_MONEY");
 		
-		String msg = "";
+		String msg = null;
 		
 		Connection con = null;
 		PreparedStatement pstmt = null;		
@@ -30,36 +31,58 @@
 		String password = "1234";// DB 계정 비밀번호
 		ResultSet rs = null;
 		boolean idChk = false;
-
-		try{
-			
+		
+		if(drvDate ==null||drvDate.trim().isEmpty()){
+			msg = "주행일자가 입력되지 않았습니다!";
+		}else if(carNo ==null||carNo.trim().isEmpty()){
+			msg = "차량번호가 입력되지 않았습니다!";
+		}else if(drvStart ==null||drvStart.trim().isEmpty()){
+			msg = "출발Km가 입력되지 않았습니다!";
+		}else if(drvEnd ==null||drvEnd.trim().isEmpty()){
+			msg = "도착km가 입력되지 않았습니다!";
+		}else if(deptCode ==null||deptCode.trim().isEmpty()){
+			msg = "부서코드가 선택되지 않았습니다!";
+		}else if(drvMoney ==null||drvMoney.trim().isEmpty()){
+			msg = "주유금액이 입력되지 않았습니다!";
+		}
+		if(msg != null){%>		
+			<script type="text/javascript">
+					alert("<%= msg %>");
+					history.go(-1);
+			</script>
+	<%}else{	
+		try{		
 			// 드라이브 로딩
 			Class.forName(driver);
 			// DB연결
 			con = DriverManager.getConnection(url, user, password);
-			String chkSql = "select * from member where DRV_DATE=? CAR_NO=?";
-			pstmt = con.prepareStatement(chkSql);
-			pstmt.setString(1, drvDate);
-			pstmt.setString(2, carNo);
-			// select문은 실행할때 반드시 ResultSet 객체에 담는다.
-			rs = pstmt.executeQuery();
-			if(rs.next()){
-				idChk = true;
-			}else{			
+		
 			String sql = "insert into tbl_drive value(?,?,?,?,?,?)";
+			//pstmt 객체에 입력받은 값을 저장하여 sql의 insert문이 실행되도록한다.
 			pstmt = con.prepareStatement(sql);
 			
 			pstmt.setString(1, drvDate); 
 			pstmt.setString(2, carNo); 
-			pstmt.setString(3, drvStart); 
-			pstmt.setString(4, drvEnd); 
+			pstmt.setInt(3,Integer.parseInt(drvStart));
+			pstmt.setInt(4,Integer.parseInt(drvEnd)); 
 			pstmt.setString(5, deptCode); 
-			pstmt.setString(6, drvMoney); 
+			pstmt.setInt(6,Integer.parseInt(drvMoney)); 
 			
 			pstmt.executeUpdate(); //insert를 성공하면 영향받은 행의 개수(1) 반환
-		}
+		%>
+			<script type="text/javascript">
+					alert("주행내역이 정상적으로 등록 되었습니다.");
+					location.href = "index.jsp";
+			</script>	
+		<%
 		}catch(Exception e){
 			e.printStackTrace();
+			%>
+			<script type="text/javascript">
+					alert("등록 실패");
+					history.go(-1);
+			</script>	
+			<%
 		}finally{
 			// 자원 해제는 반드시 작성할 것
 			if(pstmt != null){
@@ -78,33 +101,7 @@
 		}
 		
 		// DB 연동 종료 ----------------------------------------------------
-		
 	%>
-		<%  if(drvDate ==null||drvDate.isEmpty()){
-			msg = "주행일자가 입력되지 않았습니다!";
-		}else if(carNo ==null||carNo.isEmpty()){
-			msg = "차량번호가 입력되지 않았습니다!";
-		}else if(drvStart ==null||drvStart.isEmpty()){
-			msg = "출발Km가 입력되지 않았습니다!";
-		}else if(drvEnd ==null||drvEnd.isEmpty()){
-			msg = "도착km가 입력되지 않았습니다!";
-		}else if(deptCode ==null||deptCode.isEmpty()){
-			msg = "부서코드가 선택되지 않았습니다!";
-		}else if(drvMoney ==null||drvMoney.isEmpty()){
-			msg = "주유금액이 입력되지 않았습니다!";
-		}else if(idChk){
-			msg = "이미 존재하는 주행내역 입니다.";
-		}
-		if(msg !=""){%>		
-			<script type="text/javascript">
-					alert("<%= msg %>");
-					history.go(-1);
-			</script>
-		<%}else{ %>
-			<script type="text/javascript">
-					alert("주행내역이 정상적으로 등록 되었습니다.");
-					history.go(-2);
-			</script>
-		<% }%>		
+	<% }%>
 </body>
 </html>

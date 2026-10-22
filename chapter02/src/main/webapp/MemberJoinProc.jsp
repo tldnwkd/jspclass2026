@@ -21,7 +21,7 @@
 		String hobby[] = request.getParameterValues("hobby");
 		for(int i=0; i<hobby.length; i++){
 			hobbyOne += hobby[i]+" ";
-		}
+		};
 		String job = request.getParameter("job");
 		String age = request.getParameter("age");
 		String info = request.getParameter("info");

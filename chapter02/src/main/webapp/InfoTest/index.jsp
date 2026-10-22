@@ -16,6 +16,7 @@
 		// section부분 home.jsp페이지로 기본설정
 		String contentPage = "home.jsp";
 		// page값 달라질때마다 section 페이지 값 변경되는 조건문
+		
 		if("carList".equals(indexPage)){
 			contentPage = "carList.jsp";
 		}else if("driveForm".equals(indexPage)){
@@ -24,6 +25,10 @@
 			contentPage = "driveList.jsp";
 		}else if("deptStat".equals(indexPage)){
 			contentPage = "deptStat.jsp";
+		}else if("carDrive".equals(indexPage)){
+			contentPage = "carDrive.jsp";
+		}else if("companyStat".equals(indexPage)){
+			contentPage = "companyStat.jsp";
 		}
 	%>
 	<div id ="wrap">

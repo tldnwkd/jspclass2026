@@ -1,3 +1,5 @@
+<%@page import="java.text.SimpleDateFormat"%>
+<%@page import="java.text.DecimalFormat"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8" import="java.util.*"%>
 <%@ page import="java.sql.*" %>
@@ -6,6 +8,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<link rel="stylesheet" href="css/main.css">
 </head>
 <body>
 	<%
@@ -20,40 +23,48 @@
 		String password = "1234";// DB 계정 비밀번호
 		ResultSet rs = null;
 		
-		String drvDate = request.getParameter("DRV_DATE");
-        String drvNo = request.getParameter("CAR_NO");
-        String drvStart = request.getParameter("DRV_START");
-        String drvEnd = request.getParameter("DRV_END");
-        String drvCode = request.getParameter("DEPT_CODE");
-        String drvMoney = request.getParameter("DRV_MONEY");
-        
-        
+		SimpleDateFormat sf = new SimpleDateFormat("yyyyMMdd");
+		SimpleDateFormat sf02 = new SimpleDateFormat("yyyy년MM월dd일");
+		
+		DecimalFormat df = new DecimalFormat("#,##0");
+		DecimalFormat df02 = new DecimalFormat("￦#,##0");
+		
+   	%>
+		<h2>주행내역 조회</h2>
+        <table border="1">
+           <tr>
+              <th>주행일자</th>
+              <th>차량번호</th>
+              <th>모델</th>
+              <th>출발Km</th>
+              <th>도착Km</th>
+              <th>부서명</th>
+              <th>주유금액</th>
+           </tr>
+	<%	
+       
         try{
 			Class.forName(driver);
 			con = DriverManager.getConnection(url, user, password);
 			
-			String sql = "select * from tbl_drive";
+			String sql = "SELECT d.DRV_DATE, d.CAR_NO,c.CAR_MODEL,d.DRV_START,d.DRV_END,p.DEPT_NAME,d.DRV_MONEY from tbl_drive d "
+						+"INNER JOIN tbl_car c on d.CAR_NO = c.CAR_NO "
+						+"INNER JOIN tbl_dept p on p.DEPT_CODE = d.DEPT_CODE "
+						+"ORDER BY d.CAR_NO asc";
 			pstmt = con.prepareStatement(sql);
 			rs= pstmt.executeQuery();
-	%>
-			<h2>주행내역 조회</h2>
-	        <table border="1">
-	           <tr>
-	              <th>차량번호</th>
-	              <th>모델</th>
-	              <th>제조사</th>
-	              <th>구매일</th>
-	           </tr>
-	<%			
+			
 			while(rs.next()){%>
 					<tr>
-	                    <td><%= rs.getString("") %></td>	              
-	                    <td><%= rs.getString("") %></td>	                
-	                    <td><%= rs.getString("") %></td>	               
-	                    <td><%= rs.getString("") %></td>
+	                    <td><%= sf02.format(sf.parse(rs.getString("d.DRV_DATE"))) %></td>	              
+	                    <td><%= rs.getString("d.CAR_NO") %></td>	                
+	                    <td><%= rs.getString("c.CAR_MODEL") %></td>	               
+	                    <td><%= df.format(rs.getInt("d.DRV_START"))%></td>
+	                    <td><%= df.format(rs.getInt("d.DRV_END")) %></td>
+	                    <td><%= rs.getString("p.DEPT_NAME") %></td>
+	                    <td><%= df02.format(rs.getInt("d.DRV_MONEY")) %></td>
                 	</tr>
-			<%}%>
-		</table>
+			<%} %>	
 		<%}catch(Exception e){
 			e.getStackTrace();
 		}finally{
@@ -72,5 +83,6 @@
 			}
 		}	
 	%>
+	</table>
 </body>
 </html>
