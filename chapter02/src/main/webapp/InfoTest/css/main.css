@@ -87,7 +87,7 @@ section p.bold {
     font-weight: bold;
 }
 
-/* 4. Section 내부 모든 테이블 일괄 스타일 (차량조회, 주행내역조회, 부서별통계) */
+/* 4. Section 내부 모든 테이블 일괄 스타일 (차량조회, 주행내역조회, 부서별통계 등) */
 section table {
     width: 80%;
     margin: 0 auto 20px auto;
@@ -116,9 +116,34 @@ section tr:hover {
     background-color: #f1f5fa;
 }
 
-/* 5. 주행내역 등록 폼(driveForm.jsp) 전용 스타일 */
+/* 5. 주행내역 등록 폼 및 차량별 주행 조회 검색 폼 전용 스타일 */
 section form {
     width: 100%;
+}
+
+/* 차량별 주행 조회 등에서 사용하는 .center 폼 정렬 스타일 */
+section form.center {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    width: fit-content;    /* 컨텐츠 크기만큼만 너비를 가지도록 설정 */
+    margin: 0 auto 25px auto; /* 좌우 auto를 주어 부모 속성 안에서 가운데로 정렬 */
+}
+
+section form.center select {
+    width: 180px;
+    height: 34px;
+    padding: 0 8px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    outline: none;
+    font-size: 14px;
+    background-color: #fff;
+}
+
+section form.center select:focus {
+    border-color: #8a86e0;
 }
 
 section form table {
@@ -164,7 +189,7 @@ section form select:focus {
 }
 
 section form input[type="button"] {
-    padding: 8px 18px;
+    padding: 7px 16px;
     background-color: #8a86e0;
     color: #ffffff;
     border: none;
@@ -172,7 +197,6 @@ section form input[type="button"] {
     font-size: 14px;
     font-weight: bold;
     cursor: pointer;
-    margin: 5px;
     transition: background-color 0.2s;
 }
 

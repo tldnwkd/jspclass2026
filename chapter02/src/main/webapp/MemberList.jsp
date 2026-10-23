@@ -15,13 +15,13 @@
 	// DB 연동 시작 ----------------------------------------------------		
 	Connection con = null;
 	PreparedStatement pstmt = null;		
+	ResultSet rs = null;
 	// DB 접속 정보 설정		
 	String driver = "com.mysql.cj.jdbc.Driver";//JDBC 드라이버
 	// DB URL(스키마 이름 : jspdb)
 	String url = "jdbc:mysql://localhost:3306/jspdb?serverTimezone=UTC&useSSL=false";
 	String user = "root"; // DB 계정 아이디
 	String password = "1234";// DB 계정 비밀번호
-	ResultSet rs = null;
 	//회원수 세는 변수
 	int count =0;
 	/* DB는 네트워크의 톰캣서버를 통해 데이터가 전달되므로 개발자가 오류를 찾기 어렵다,
@@ -67,7 +67,7 @@
 			<td><%= rs.getString("job") %></td>
 			<td><%= rs.getString("age") %></td>
 			<td><%= rs.getString("info") %></td>
-			<td><a href="MemberDetail.jsp?id=<%=rs.getString("id")%>">상세보기</a></td>
+			<td><a href="main.jsp?page=MemberDetail&id=<%=rs.getString("id")%>">상세보기</a></td>
 		</tr>
 	<%}%>
 	<%	
@@ -93,6 +93,6 @@
 		
 	%>
 		</table>
-		<a href="MemberJoin.jsp">회원가입으로 가기</a>
+		<a href="main.jsp?page=MemberJoin">회원가입으로 가기</a>
 </body>
 </html>

@@ -41,30 +41,36 @@
 			if(rs.next()){%>
 				<table border="1">
 				<tr>
-					<td>아이디 : <%= getid%></td>
+					<td>아이디  </td><td><%= getid%></td>
 				</tr>
 				<tr>
-					<td>이메일 : <%= rs.getString("email")%></td>
+					<td>이메일  </td><td><%= rs.getString("email")%></td>
 				</tr>
 				<tr>
-					<td>전화번호 : <%= rs.getString("tel") %></td>
+					<td>전화번호 </td><td> <%= rs.getString("tel") %></td>
 				</tr>
 				<tr>
-					<td>관심분야 : <%= rs.getString("hobby") %></td>
+					<td>관심분야 </td><td> <%= rs.getString("hobby") %></td>
 				</tr>
 				<tr>
-					<td>직업 : <%= rs.getString("job")%></td>
+					<td>직업 </td><td> <%= rs.getString("job")%></td>
 				</tr>
 				<tr>
-					<td>연령 : <%=rs.getString("age")%></td>
+					<td>연령 </td><td> <%=rs.getString("age")%></td>
 				</tr>
 				<tr>
-					<td>남기는 말 : <%= rs.getString("info")%></td>
-				</tr>
+					<td>남기는 말 </td><td><%= rs.getString("info")%></td>
+				</tr>	
 				<tr>
-					<td><a href="MemberList.jsp">회원 목록으로 이동</a></td>
-				</tr>
+					<td colspan="2">
+						<button onclick="location.href='main.jsp?page=MemberUpdateForm&id=<%=getid%>'">회원수정</button>
+						<button onclick="location.href='main.jsp?page=MemberDeleteForm&id=<%=getid%>'">회원삭제</button>
+						<button onclick="location.href='main.jsp?page=MemberList'">목록보기</button>
+						<button onclick="location.href='main.jsp?page=MemberJoin'">회원가입</button>
+					</td>
+				</tr>	
 			</table> 
+					<p><a href="main.jsp?page=MemberList">회원 목록으로 이동</a></p>		
 		<%}
 		}catch(Exception e){
 			e.printStackTrace();
@@ -84,9 +90,6 @@
 			}
 		}
 	%>
-	
-	
-
 
 </body>
 </html>
