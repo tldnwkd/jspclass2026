@@ -27,7 +27,6 @@
 		String password = "1234";
 		boolean Success = false;
 		
-		System.out.println(pw);
 		// 비밀번호 일치여부 판단
 		if(pw == null ||pw.trim().isEmpty()){
 			msg = "비밀번호를 입력하세요";
