@@ -32,8 +32,7 @@
 				if(pstmt!=null) pstmt.close();
 			}catch(Exception e){e.printStackTrace();};
 		}
-	%>
-	
+	%>	
  	<script type="text/javascript">
  		<%if(msgChk){%>
 			alert("회원등록이 완료됨");
