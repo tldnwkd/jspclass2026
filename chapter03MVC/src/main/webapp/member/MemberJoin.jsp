@@ -1,13 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8" import="java.util.*"%>
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<title>회원가입</title>
-<!-- <link rel="stylesheet" href="/style/index02.css"> -->
-</head>
-<body>
+
 	<div class="joinwrap">
 	 	<h2 align="center"> 회원가입 </h2>
 	 	<form action="MProc.do" method="post" name="mfrm">
@@ -149,5 +142,3 @@
 			f.submit();
 		}
 	</script>
-</body>
-</html>

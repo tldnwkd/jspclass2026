@@ -18,6 +18,7 @@
 	<div class="container">
 		<jsp:include page="header.jsp"/>
 			<section>
+			
 				<jsp:include page="<%= section %>"/>
 			</section>
 		<jsp:include page="footer.jsp" />			

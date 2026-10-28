@@ -29,13 +29,23 @@ public class MemberListCon extends HttpServlet {
 		// 회원 여러명의 자료를 화면에 출력하기 위해 DB에서 Select 꺼내온다.
 		// ArrayList<> 이용하여 select로 추출한 모든 회원의 정보를 담는다.
 		MemberDAO mdao = new MemberDAO();
-		
-		ArrayList<MemberDTO> allMember = mdao.getallMember();
-		// request.setAttribute() 객체에 담아 디스패쳐 할 예정임
-		request.setAttribute("alist", allMember);
 		// jsp파일로 디스패쳐 하기
+		String searchType = request.getParameter("searchType");
+		String keyword = request.getParameter("keyword");
+		ArrayList<MemberDTO> all; 
+		if(searchType !=null && keyword !=null) {
+			all = mdao.searchMember(searchType,keyword);
+			request.setAttribute("alist", all);
+		}else {			
+			all = mdao.getallMember();
+			// request.setAttribute() 객체에 담아 디스패쳐 할 예정임
+			request.setAttribute("alist", all);		
+		}
+		request.setAttribute("keyword", keyword);
+		request.setAttribute("searchType", searchType);
+		
 		RequestDispatcher rd = request.getRequestDispatcher("/index.jsp?section=member/MemberList.jsp");
 		rd.forward(request, response);
+		
 	}
-
 }
