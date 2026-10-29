@@ -165,17 +165,17 @@ public class MemberDAO {
 	//-------------------------------------------------------
 	
 	
-	public ArrayList<MemberDTO> mypage(String id){
-		ArrayList<MemberDTO> m = new ArrayList<MemberDTO>();
+	public MemberDTO mypage(String id){
+		MemberDTO mdto = new MemberDTO();
 		
 		try {	
 			con =Util.getConnection();
-			String sql = "select * from member where id='"+ id+"'";
+			String sql = "select * from member where id=?";
 			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, id);
 			rs = pstmt.executeQuery();	
 			System.out.println("sqlÄõ¸®¹®:"+sql);
 			while(rs.next()) {
-				MemberDTO mdto = new MemberDTO();
 				mdto.setId(rs.getString(1));
 				mdto.setPass(rs.getString(2));
 				mdto.setEmail(rs.getString(3));
@@ -184,8 +184,6 @@ public class MemberDAO {
 				mdto.setJob(rs.getString(6));
 				mdto.setAge(rs.getString(7));
 				mdto.setInfo(rs.getString(8));
-				
-				m.add(mdto);
 			}
 		}catch(Exception e) {
 			e.printStackTrace();
@@ -196,17 +194,16 @@ public class MemberDAO {
 				if(con !=null) con.close();
 			}catch(Exception e){e.printStackTrace();}
 		}	
-		return m;
+		return mdto;
 	} 
 	//------------------------------------------------------
 	public void updateID(MemberDTO mdto) {
 		try {	
 			boolean chk = false;
 			con =Util.getConnection();
-			String sql = "update member set pass=? email=? tel=? hobby=? job=? age=? info=? where id='" + mdto.getId()+"'";
+			String sql = "update member set pass=?,email=?,tel=?,hobby=?,job=?,age=?,info=? where id=?";
 			pstmt = con.prepareStatement(sql);
 			
-			System.out.println("sqlÄõ¸®¹®02:"+sql);
 			pstmt.setString(1,mdto.getPass());
 			pstmt.setString(2,mdto.getEmail());
 			pstmt.setString(3,mdto.getTel()); 
@@ -214,6 +211,7 @@ public class MemberDAO {
 			pstmt.setString(5,mdto.getJob());
 			pstmt.setString(6,mdto.getAge());
 			pstmt.setString(7,mdto.getInfo());			
+			pstmt.setString(8,mdto.getId());
 			
 			chk = pstmt.executeUpdate()>0;	
 		}catch(Exception e) {

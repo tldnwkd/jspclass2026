@@ -1,14 +1,27 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+
+<c:if test="${param.result =='ok' }">
+	<script type="text/javascript">
+		alert("업데이트가 완료되었습니다.")
+		location.href="MyPage.do"
+	</script>
+</c:if>
+<c:if test="${param.result =='passfail' }">
+	<script type="text/javascript">
+		alert("업데이트 실패")
+		location.href="MyPage.do"
+	</script>
+</c:if>
     <div class="joinwrap">
 	 	<h2 align="center"> MyPage </h2>
 	 	<form action="MyPageUpdate.do" method="post" name="mfrm">
 	 		<table width="500" border="1">
-	 		<c:forEach var="mdto" items="${alist }">
 	 			<tr height="50">
 	 				<td align="center" width="150">아이디</td>
 	 				<td width="350">
+	 					<input type="hidden" value="${mdto.id }" name="id">
 	 					<input type="text" name="id" readonly="readonly" value="${mdto.id }">
 	 				</td>
 	 			</tr>
@@ -39,14 +52,11 @@
 	 			<tr height="50">
 	 				<td align="center" width="150">관심분야</td>
 	 				<td width="350">
-	 					<input type="checkbox" name="hobby" value="캠핑" id="camping">
-	 					<label for="camping">캠핑</label>&nbsp;&nbsp;
-	 					<input type="checkbox" name="hobby" value="등산" id="mount">
-	 					<label for="mount">등산</label>&nbsp;&nbsp;
-	 					<input type="checkbox" name="hobby" value="영화" id="movie">
-	 					<label for="movie">영화</label>&nbsp;&nbsp;
-	 					<input type="checkbox" name="hobby" value="독서" id="book">
-	 					<label for="book">독서</label>&nbsp;&nbsp;
+	 					<c:forTokens items="캠핑 등산 영화 독서" delims=" " var="item">
+	 						<input type="checkbox" name="hobby" value="${item }" id="hobby_${item }"
+	 						<c:if test="${mdto.hobby.contains(item) }">checked</c:if>/> 						
+	 						<label for="hobby_${item }">${item }</label>&nbsp;&nbsp;
+	 					</c:forTokens>
 	 				</td>
 	 			</tr>
 	 			<tr height="50">
@@ -82,10 +92,9 @@
 	 			<tr height="50">
 	 				<td colspan="2" align="center">
 						<input type="button" value="수정" onclick="checkform()"> 					
-						<input type="reset" value="취소"> 					
+						<input type="reset" value="취소" onclick="location.href='index.jsp'"> 					
 	 				</td>
 	 			</tr>
-	 		</c:forEach>	
 	 		</table>
 	 	</form>
  </div>
@@ -99,10 +108,6 @@
 					hobCheck = true;
 					break;
 				}
-			}
-			if(f.id.value == ""){
-				alert("아이디를 입력하세요.");
-				return;
 			}
 			if(f.pass.value == ""){
 				alert("비밀번호를 입력하세요.");

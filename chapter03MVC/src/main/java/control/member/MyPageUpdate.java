@@ -10,6 +10,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.apache.catalina.connector.Response;
+
 import model.member.MemberDAO;
 import model.member.MemberDTO;
 
@@ -45,24 +47,23 @@ public class MyPageUpdate extends HttpServlet {
 		
 		
 		String jspAddress = "";
-		if(pass.equals(passchk)) {
-			jspAddress = "index.jsp";
-			mdto.setId(request.getParameter("id"));
-			mdto.setPass(pass);
-			mdto.setPasschk(passchk);
-			mdto.setEmail(request.getParameter("email"));
-			mdto.setTel(request.getParameter("tel"));
-			mdto.setHobby(oneHobby);		
-			mdto.setJob(request.getParameter("job"));
-			mdto.setAge(request.getParameter("age"));
-			mdto.setInfo(request.getParameter("info"));
-			mdao.updateID(mdto);
-			request.setAttribute("msg", "업데이트가 완료되었습니다.");
-		}else {
-			request.setAttribute("msg", "비밀번호를 확인하세요.");
-			jspAddress = "MyPage.do";
+		if(pass!=null &&passchk!=null) {
+			if(pass.equals(passchk)) {
+				mdto.setId(request.getParameter("id"));
+				mdto.setPass(pass);
+				mdto.setPasschk(passchk);
+				mdto.setEmail(request.getParameter("email"));
+				mdto.setTel(request.getParameter("tel"));
+				mdto.setHobby(oneHobby);		
+				mdto.setJob(request.getParameter("job"));
+				mdto.setAge(request.getParameter("age"));
+				mdto.setInfo(request.getParameter("info"));
+				mdao.updateID(mdto);
+				jspAddress = "MyPage.do?result=ok";
+			}else {
+				jspAddress = "MyPage.do?result=passfail";
+			}
+			response.sendRedirect(jspAddress);	
 		}
-		RequestDispatcher rd = request.getRequestDispatcher(jspAddress);
-		rd.forward(request, response);
 	}
 }

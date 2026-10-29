@@ -1,7 +1,6 @@
 package control.member;
 
 import java.io.IOException;
-import java.util.ArrayList;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -32,15 +31,15 @@ public class MyPage extends HttpServlet {
 				
 		HttpSession session = request.getSession(false);
 		MemberDAO mdao = new MemberDAO();
-		ArrayList<MemberDTO> all;
+		MemberDTO mdto = new MemberDTO();
 		
-		System.out.println(session.getAttribute("id"));
 		String id = (String)session.getAttribute("id");
 		if(session != null) {
-			all= mdao.mypage(id);
-			request.setAttribute("alist", all);
+			mdto= mdao.mypage(id);
 		}
+		request.setAttribute("mdto",mdto);
 		RequestDispatcher rd = request.getRequestDispatcher("/index.jsp?section=member/Mypage.jsp");
-		rd.forward(request, response);
+		rd.forward(request, response); //select문을 제외한 나머지 쿼리문 작성시 F5로 새로고침 시 화면이 다시 재요청이 되는 현상이 발생한다.
+		
 	}
 }
