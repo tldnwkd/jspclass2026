@@ -28,6 +28,7 @@ public class MemberListCon extends HttpServlet {
 	protected void reqpro(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// 회원 여러명의 자료를 화면에 출력하기 위해 DB에서 Select 꺼내온다.
 		// ArrayList<> 이용하여 select로 추출한 모든 회원의 정보를 담는다.
+		
 		MemberDAO mdao = new MemberDAO();
 		// jsp파일로 디스패쳐 하기
 		String searchType = request.getParameter("searchType");
